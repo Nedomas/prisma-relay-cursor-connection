@@ -1,3 +1,4 @@
+// @ts-nocheck
 import graphqlFields from 'graphql-fields'
 import { Connection, ConnectionArguments, Options, PrismaFindManyArguments } from './interfaces'
 
@@ -15,8 +16,7 @@ export async function findManyCursorConnection<Model = { id: string }, Cursor = 
     throw new Error('This code path can never happen, only here for type safety')
   }
 
-
-  const options = pOptions || getDefaultOptions()
+  const options = Object.assign({}, getDefaultOptions(), pOptions)
   const topLevelFields = options.info && Object.keys(graphqlFields(options.info))
 
   let nodes: Array<Model>
